@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+  <name>Color this Drawing</name>
+  <id>fr.cli345.colorThisDrawing3</id>
+  <param name="tab" type="notebook">
+    <page name="help" gui-text="Help">
+      <label appearance="header">Goal</label>
+      <label xml:space="preserve">This extension transforms the drawing into a game that allows the user to color the drawing.
+      </label><image>colorThisDrawing1.png</image>
+      <label appearance="header">User guide</label>
+      <label xml:space="preserve">1) Click 'Apply'
+2) Save the file
+3) Test it by opening the file with a web browser</label>
+    </page>
+  </param>
+  <effect needs-live-preview="false">
+    <object-type>all</object-type>
+    <effects-menu>
+        <submenu name="Gamify">
+        </submenu>
+    </effects-menu>
+  </effect>
+
+  <script>
+    <command location="inx" interpreter="python">colorThisDrawing.py</command>
+  </script>
+</inkscape-extension>
