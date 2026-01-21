@@ -31,7 +31,7 @@
     </page>
     <page name="help" gui-text="Help">
       <label appearance="header">Goal</label>
-      <label xml:space="preserve">This extension builds a dynamic HTML page that requests that the user finds all the ... (according to parameters).
+      <label xml:space="preserve">This extension transforms the drawing into a game that requests that the user finds all the ... (according to parameters).
       </label>
       <label appearance="header">User guide</label>
       <label xml:space="preserve">1) Prepare all the elements you want the user to find (for example, by setting a class to them)
