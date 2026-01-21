@@ -35,7 +35,7 @@
     </page>
     <page name="help" gui-text="Help">
       <label appearance="header">Goal</label>
-      <label xml:space="preserve">This extension builds a dynamic HTML page that requests that the user finds all the matching items.
+      <label xml:space="preserve">This extension transforms the drawing into a game that requests that the user finds all the matching items.
       </label>
       <label appearance="header">User guide</label>
       <label xml:space="preserve">1) Prepare all the elements you want the user to match: set a same class to each item of a match
