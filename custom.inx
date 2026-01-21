@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
   <name>Custom</name>
-  <id>fr.cli345.custom6</id>
+  <id>fr.cli345.custom7</id>
   <param name="tab" type="notebook">
-    <page name="css" gui-text="CSS">
+    <page name="css" gui-text="Style">
       <param name="css" gui-text="CSS" gui-description="Custom CSS" type="string" appearance="multiline">.message {
 	font-size: 1em;
 	&amp; > rect {
@@ -25,16 +25,16 @@
       <label xml:space="preserve">This is for advanced users (but, for ease of use, some JavaScript functions and FuncSug functions are predefined)
       </label>
       <label appearance="header">Goal</label>
-      <label xml:space="preserve">This extension builds a dynamic HTML page that does what you program
+      <label xml:space="preserve">This extension transforms the drawing into a game that does what you program says
       </label>
       <label appearance="header">User guide</label>
-      <label xml:space="preserve">3) In the 'Optional parameters' tab,
-       3.1) enter the list of classes that represents your matches
-       3.2) if you want, customize the CSS (for example, to change the color of highlighting)
-4) Click 'Apply'
-5) Test it by:
-       5.1) Running the appropriate 'localServer' file (in the 'build' subdirectory)
-       5.2) Going (in a web browser) to 'http://localhost:8000' (click on the following url)</label><label appearance="url">http://localhost:8000</label>
+      <label xml:space="preserve">1) Prepare the appropriate elements according to your program
+2) If you want, customize the CSS in the 'Style' tab
+3) If you want, add JavaScript code in the 'JavaScript' tab
+4) Add your FuncSug program in the 'FuncSug' tab (Be careful not to replace tabulations with spaces)
+5) Click 'Apply'
+6) Save the file
+7) Test it by opening the file with a web browser</label>
      </page>
    </param>
   <effect needs-live-preview="false">
