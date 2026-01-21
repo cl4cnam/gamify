@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
   <name>Custom (Single Tab)</name>
-  <id>fr.cli345.custom1_a</id>
+  <id>fr.cli345.custom1_d</id>
   <param name="tab" type="notebook">
     <page name="sourceCode" gui-text="Source code">
-      <param name="sourceCode" gui-text="Source code" gui-description="Source code (Title, CSS, JavaScript, FuncSug separated by '===+++===+++===')" type="string" appearance="multiline"></param>
+      <param name="sourceCode" gui-text="Source code" gui-description="Source code (Title, CSS, JavaScript, FuncSug separated by '===+++===+++===')" type="string" appearance="multiline">title
+===+++===+++===
+/* CSS part */
+/* ======== */
+
+===+++===+++===
+// JavaScript part
+//================
+
+===+++===+++===
+# FuncSug part
+#=============
+js ():
+	console.log('Hello World!')
+
+</param>
     </page>
     <page name="help" gui-text="Help">
       <label appearance="header">Goal</label>
