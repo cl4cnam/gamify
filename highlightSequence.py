@@ -43,7 +43,7 @@ function getAll(ps_matchList) {
 
 function highlight(list, direction) {
 	if (list.num === undefined) {
-		if (direction == 1) list.num = 0
+		if (direction == 1) list.num = -1
 		else return
 	} else {
 		// remove old highlighting
@@ -71,10 +71,16 @@ parallel ||
 		awaitClickBeep('svg')
 		calljs highlight(elementsToFind, direction)
 ||
+	var direction := 1
+	while true:
+		var evt := awaitDomeventBeep('keydown', 'svg')
+		if evt.key = 'ArrowRight':
+			calljs highlight(elementsToFind, direction)
+||
 	var direction := -1
 	while true:
 		var evt := awaitDomeventBeep('keydown', 'svg')
-		if evt.key = 'Backspace':
+		if evt.key = 'Backspace' or evt.key = 'ArrowLeft':
 			calljs highlight(elementsToFind, direction)
 '''
 
