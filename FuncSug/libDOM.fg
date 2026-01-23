@@ -414,7 +414,7 @@
 		if (lElt===null) console.log("ERROR !!! libDOM.fg/getDomevent '" + p_idElt + "' selector references no element!")
 		lElt.disabled = false
 		const l_react = function(evt) {
-			evt.preventDefault()
+			// evt.preventDefault()
 			lElt.removeEventListener(p_domevt, l_react)
 			output(evt)
 		};
