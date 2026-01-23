@@ -6,7 +6,7 @@
     <page name="selection" gui-text="Selection">
       <label appearance="header">Selection</label>
       <param name="matchNumber" gui-text="Number of elements per match" gui-description="Number of elements that constitutes a match" type="string">2</param>
-      <param name="matchList" gui-text="List of match class" gui-description="Comma separated list of the classes that identified the matches" type="string">match1,match2,match3</param>
+      <param name="matchList" gui-text="List of match classes" gui-description="Comma separated list of the classes that identified the matches" type="string">match1,match2,match3</param>
     </page>
     <page name="style" gui-text="Style">
       <label appearance="header">Style</label>
