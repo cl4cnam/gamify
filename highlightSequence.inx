@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+  <name>Highlight Sequence</name>
+  <id>fr.cli345.highlightSequence4</id>
+  <param name="tab" type="notebook">
+    <page name="selection" gui-text="Selection">
+      <label appearance="header">Selection</label>
+      <param name="matchList" gui-text="List of step classes" gui-description="Comma separated list of the classes that identified the steps" type="string">step1,step2,step3</param>
+    </page>
+    <page name="style" gui-text="Style">
+      <label appearance="header">Style</label>
+      <param name="css" gui-text="CSS" gui-description="Custom CSS" type="string" appearance="multiline">.highlight {
+	outline: solid green 2px;
+}</param>
+    </page>
+    <page name="help" gui-text="Help">
+      <label appearance="header">Goal</label>
+      <label xml:space="preserve">This extension transforms the drawing into a presentation that requests that highlights some items at each step.
+      </label>
+      <label appearance="header">User guide</label>
+      <label xml:space="preserve">1) Prepare all the elements you want to be highlighted: set a same class to each item of a step
+2) In the 'Selection' tab, enter the list of classes that represents your steps
+3) If you want, customize the CSS (for example, to change the color of highlighting) in the 'Style' tab
+4) Click 'Apply'
+5) Save the file
+6) Test it by opening the file with a web browser</label>
+     </page>
+   </param>
+  <effect needs-live-preview="false">
+    <object-type>all</object-type>
+    <effects-menu>
+        <submenu name="Gamify">
+        </submenu>
+    </effects-menu>
+  </effect>
+
+  <script>
+    <command location="inx" interpreter="python">highlightSequence.py</command>
+  </script>
+</inkscape-extension>
