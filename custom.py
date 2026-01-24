@@ -50,12 +50,12 @@ function fixMessageDisplay1(selector) {
 	const invScreenMatrix = screenMatrix.inverse()
 	const matrix_trans = invScreenMatrix.multiply(scrollTranslateMatrix)
 	document.querySelector(selector)?.transform.baseVal.getItem(0).setMatrix(matrix_trans)
-	return 0
 }
 
 function fixMessageDisplay(selector) {
 	fixMessageDisplay1(selector)
 	window.addEventListener('scroll', fixMessageDisplay1.bind(undefined, selector))
+	return 0
 }
 
 //window.onscroll = fixMessageDisplay
@@ -63,16 +63,26 @@ function fixMessageDisplay(selector) {
 ===+++===+++===
 # FuncSug part
 #=============
-def showNewMessageDuringSeconds(p_message, p_seconds, p_messageXShift, p_messageYShift, p_interline):
+def showNewMessageWithidDuringSeconds(p_message, p_id, p_messageXShift, p_messageYShift, p_interline, p_seconds):
 	parallel exitWith branch 1 ||
 		waitSeconds(p_seconds)
 	||
-		showNewMessageForever(p_message, 'svg', p_messageXShift, p_messageYShift, p_interline)
+		showNewMessageWithidForever(p_message, p_id, p_messageXShift, p_messageYShift, p_interline, 'svg')
 	||
 		repeat 4:
 			'pause'
-		var class := '.message'
-		calljs fixMessageDisplay(class)
+		var messageSelector := '#' + p_id
+		calljs fixMessageDisplay(messageSelector)
+def showNewMessageWithidUntilClick(p_message, p_id, p_messageXShift, p_messageYShift, p_interline):
+	parallel exitWith branch 1 ||
+		awaitClickBeep('#' + p_id)
+	||
+		showNewMessageWithidForever(p_message, p_id, p_messageXShift, p_messageYShift, p_interline, 'svg')
+	||
+		repeat 4:
+			'pause'
+		var messageSelector := '#' + p_id
+		calljs fixMessageDisplay(messageSelector)
 
 ''' + p_options.funcsug.replace(r'\n', '\n')
 
