@@ -210,8 +210,13 @@
 
 {deffunc showNewMessageForever (p_message p_idAnchor p_dx p_dy p_ddy)
 #        -------------------
+	(showNewMessageWithidForever $p_message false $p_dx $p_dy $p_ddy $p_idAnchor)
+}
+
+{deffunc showNewMessageWithidForever (p_message p_id p_dx p_dy p_ddy p_idAnchor)
+#        -------------------
 	.var elt
-	{ext (p_message p_idAnchor p_dx p_dy p_ddy) `
+	{ext (p_message p_idAnchor p_id p_dx p_dy p_ddy) `
 		const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect")
 		
 		const text = document.createElementNS("http://www.w3.org/2000/svg", "text")
@@ -229,10 +234,11 @@
 		g.appendChild(rect)
 		g.appendChild(text)
 		g.classList.add('message')
+		if (p_id) g.setAttribute('id', p_id)
 		
 		const lElt_anchor = (p_idAnchor instanceof Element)
 						? p_idAnchor
-						: document.querySelector(p_idAnchor) || console.log("ERROR !!! libDOM.fg/showElementForever '" + p_idAnchor + "' selector references no element!")
+						: document.querySelector(p_idAnchor) || console.log("ERROR !!! libDOM.fg/showNewMessageForever '" + p_idAnchor + "' selector references no element!")
 		lElt_anchor.appendChild(g)
 		
 		const bb = text.getBBox()
