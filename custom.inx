@@ -1,28 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
   <name>Custom</name>
-  <id>fr.cli345.custom7</id>
+  <id>fr.cli345.custom22</id>
   <param name="tab" type="notebook">
     <page name="css" gui-text="Style">
       <param name="css" gui-text="CSS" gui-description="Custom CSS" type="string" appearance="multiline">.message {
-	font-size: 1em;
+	font-size: 2em;
 	&amp; > rect {
 		fill: #fea;
 		stroke: #ed9;
 		opacity: 0.8;
 	}
+}
+.highlight {
+	outline: solid green 2px;
 }</param>
     </page>
     <page name="js" gui-text="JavaScript">
-      <param name="js" gui-text="JavaScript" gui-description="Custom JavaScript" type="string" appearance="multiline">// JavaScriptCode</param>
+      <param name="js" gui-text="JavaScript" gui-description="Custom JavaScript" type="string" appearance="multiline">// JavaScriptCode
+      function getColors() {return ['red', 'yellow', 'blue', 'green']}
+</param>
     </page>
     <page name="funcsug" gui-text="FuncSug">
-      <param name="funcsug" gui-text="FuncSug" gui-description="Custom FuncSug" type="string" appearance="multiline">showNewMessageForever('Hello World!', 'svg', 0, 0, 30)
+      <param name="funcsug" gui-text="FuncSug" gui-description="Custom FuncSug" type="string" appearance="multiline"># This program is an example
+#(To make it work, you need to set the classes "match1", "match2", "match3" to some elements)
+
+# Show the matches
+#-----------------
+showNewMessageWithidUntilClick("Here are all the matches you'll have to find.
+Memorize them.
+Finally, press the escape key.
+(To continue, click this message)", 'introMessage', 10, 10, 40)
+parallel exitWith branch 2 ||
+	highlightSequence('match1,match2,match3')
+||
+	var continue := true
+	while continue:
+		var evt := awaitDomeventBeep('keydown', 'svg')
+		if evt.key = 'Escape':
+			continue := false
+
+# Let the user find the matches
+#------------------------------
+showNewMessageWithidUntilClick('Find all the matches', 'findMessage', 10, 10, 40)
+
+# Let the user colorize the drawing
+#----------------------------------
+showNewMessageWithidUntilClick('Now, you can colorize the drawing', 'colorMessage', 10, 10, 40)
+colorThisDrawing(calljs getColors())
 </param>
     </page>
     <page name="help" gui-text="Help">
       <label appearance="header">Warning</label>
-      <label xml:space="preserve">This is for advanced users (but, for ease of use, some JavaScript functions and FuncSug functions are predefined)
+      <label xml:space="preserve">This is for advanced users
+(but, for ease of use, some JavaScript functions and FuncSug functions are predefined, so you can combine several predefined mini-games)
       </label>
       <label appearance="header">Goal</label>
       <label xml:space="preserve">This extension transforms the drawing into a game that does what you program says
@@ -35,6 +66,29 @@
 5) Click 'Apply'
 6) Save the file
 7) Test it by opening the file with a web browser</label>
+     </page>
+    <page name="functions" gui-text="Available Functions">
+      <label appearance="header">colorThisDrawing(p_colors)</label>
+      <label xml:space="preserve">Allows the user to color the drawing.
+p_colors: the colors that will be available.
+      </label>
+      <label appearance="header">showNewMessageWithidDuringSeconds(p_message, p_id, p_messageXShift, p_messageYShift, p_interline, p_seconds)</label>
+      <label xml:space="preserve">Show a message to the user during p_seconds seconds.
+p_message: the message that will be shown. It can contain new line characters.
+p_id: the id you want
+p_messageXShift: horizontal shift
+p_messageYShift: vertical shift
+p_interline: vertical shift between lines
+p_seconds: duration of display
+      </label>
+      <label appearance="header">showNewMessageWithidUntilClick(p_message, p_id, p_messageXShift, p_messageYShift, p_interline)</label>
+      <label xml:space="preserve">Show a message to the user until the user clicks it.
+p_message: the message that will be shown. It can contain new line characters.
+p_id: the id you want
+p_messageXShift: horizontal shift
+p_messageYShift: vertical shift
+p_interline: vertical shift between lines
+      </label>
      </page>
    </param>
   <effect needs-live-preview="false">
