@@ -220,7 +220,7 @@
 		const rect = document.createElementNS("http://www.w3.org/2000/svg", "rect")
 		
 		const text = document.createElementNS("http://www.w3.org/2000/svg", "text")
-		const lines = p_message.split('\\n')
+		const lines = p_message.replaceAll('\\n','\n').split('\n')
 		lines.forEach(line=>{
 			const tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan")
 			tspan.setAttribute('x', 20 + p_dx)
