@@ -156,11 +156,11 @@
 	`}
 }
 
-{deffunc DelCssClassFrom (p_class p_selector)
+{deffunc delCssClassFrom (p_class p_selector)
 #        ---------------
 	{short (p_class p_selector) `
 		const lElt_anchor = (p_selector instanceof Element) ? p_selector : document.querySelector(p_selector)
-		if (lElt_anchor===null) console.log("ERROR !!! libDOM.fs/addCssClassTo '" + p_selector + "' selector references no element!")
+		if (lElt_anchor===null) console.log("ERROR !!! libDOM.fs/delCssClassFrom '" + p_selector + "' selector references no element!")
 		lElt_anchor.classList.remove(p_class)
 	`}
 }
