@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
-  <name>Custom</name>
-  <id>fr.cli345.custom22</id>
+  <name>Custom (Multiple Tab)</name>
+  <id>fr.cli345.custom38</id>
   <param name="tab" type="notebook">
     <page name="css" gui-text="Style">
       <param name="css" gui-text="CSS" gui-description="Custom CSS" type="string" appearance="multiline">.message {
@@ -12,8 +12,14 @@
 		opacity: 0.8;
 	}
 }
-.highlight {
+.chosen {
+	outline: solid red 1px;
+}
+.matched {
 	outline: solid green 2px;
+}
+.highlight {
+	outline: solid blue 2px;
 }</param>
     </page>
     <page name="js" gui-text="JavaScript">
@@ -27,27 +33,33 @@
 
 # Show the matches
 #-----------------
-showNewMessageWithidUntilClick("Here are all the matches you'll have to find.
-Memorize them.
-Finally, press the escape key.
-(To continue, click this message)", 'introMessage', 10, 10, 40)
-parallel exitWith branch 2 ||
-	highlightSequence('match1,match2,match3')
+parallel exitWith branch 3 ||
+    showNewMessageWithidUntilClick("Here are all the matches you'll have to find.
+    Memorize them.
+    Finally, press the escape key.
+    (To continue, click this message)", 'introMessage', 10, 10, 40)
 ||
-	var continue := true
-	while continue:
-		var evt := awaitDomeventBeep('keydown', 'svg')
-		if evt.key = 'Escape':
-			continue := false
+    highlightSequence('match1,match2,match3')
+||
+    var continue := true
+    while continue:
+        var evt := awaitDomeventBeep('keydown', 'svg')
+        if evt.key = 'Escape':
+            continue := false
 
 # Let the user find the matches
 #------------------------------
-showNewMessageWithidUntilClick('Find all the matches', 'findMessage', 10, 10, 40)
+parallel ||
+    showNewMessageWithidUntilClick('Find all the matches', 'findMessage', 10, 10, 40)
+||
+    matchItems(2, 'match1,match2,match3')
 
 # Let the user colorize the drawing
 #----------------------------------
-showNewMessageWithidUntilClick('Now, you can colorize the drawing', 'colorMessage', 10, 10, 40)
-colorThisDrawing(calljs getColors())
+parallel ||
+    showNewMessageWithidUntilClick('Now, you can colorize the drawing', 'colorMessage', 10, 10, 40)
+||
+    colorThisDrawing(calljs getColors())
 </param>
     </page>
     <page name="help" gui-text="Help">
@@ -66,29 +78,59 @@ colorThisDrawing(calljs getColors())
 5) Click 'Apply'
 6) Save the file
 7) Test it by opening the file with a web browser</label>
-     </page>
+    </page>
     <page name="functions" gui-text="Available Functions">
-      <label appearance="header">colorThisDrawing(p_colors)</label>
-      <label xml:space="preserve">Allows the user to color the drawing.
-p_colors: the colors that will be available.
-      </label>
-      <label appearance="header">showNewMessageWithidDuringSeconds(p_message, p_id, p_messageXShift, p_messageYShift, p_interline, p_seconds)</label>
-      <label xml:space="preserve">Show a message to the user during p_seconds seconds.
+      <label appearance="header">Mini-games</label>
+      <param name="tab2" type="notebook">
+        <page name="colorThisDrawing" gui-text="colorThisDrawing">
+          <label appearance="header">colorThisDrawing(p_colors)</label>
+          <label xml:space="preserve">	Allows the user to color the drawing.
+
+p_colors: the colors that will be available. This has to be an array of string. Each element of it has to be a CSS color string.
+          </label>
+        </page>
+        <page name="highlightSequence" gui-text="highlightSequence">
+          <label appearance="header">highlightSequence(p_sequence)</label>
+          <label xml:space="preserve">	Highlights a sequence of elements one step at a time.
+
+p_sequence: the sequence of elements to be highlighted one step at a time. This has to be a string containing the classes of elements in order separated by a comma (without space).
+          </label>
+        </page>
+        <page name="matchItems" gui-text="matchItems">
+          <label appearance="header">matchItems(p_numberPerMatch, p_matchList)</label>
+          <label xml:space="preserve">	Waits until the user finds all the matching items.
+
+p_numberPerMatch: number of elements that constitutes a match.
+p_matchList: Comma separated list of the classes that identified the matches. This has to be a string containing the classes of elements separated by a comma (without space).
+          </label>
+        </page>
+      </param>
+      <label appearance="header">Display message</label>
+      <param name="tab3" type="notebook">
+        <page name="showNewMessageWithidDuringSeconds" gui-text="showNewMessageWithidDuringSeconds">
+          <label appearance="header">showNewMessageWithidDuringSeconds(p_message, p_id, p_messageXShift, p_messageYShift, p_interline, p_seconds)</label>
+          <label xml:space="preserve">	Show a message to the user during p_seconds seconds.
+
 p_message: the message that will be shown. It can contain new line characters.
 p_id: the id you want
 p_messageXShift: horizontal shift
 p_messageYShift: vertical shift
 p_interline: vertical shift between lines
 p_seconds: duration of display
-      </label>
-      <label appearance="header">showNewMessageWithidUntilClick(p_message, p_id, p_messageXShift, p_messageYShift, p_interline)</label>
-      <label xml:space="preserve">Show a message to the user until the user clicks it.
+          </label>
+        </page>
+        <page name="showNewMessageWithidUntilClick" gui-text="showNewMessageWithidUntilClick">
+          <label appearance="header">showNewMessageWithidUntilClick(p_message, p_id, p_messageXShift, p_messageYShift, p_interline)</label>
+          <label xml:space="preserve">	Show a message to the user until the user clicks it.
+
 p_message: the message that will be shown. It can contain new line characters.
 p_id: the id you want
 p_messageXShift: horizontal shift
 p_messageYShift: vertical shift
 p_interline: vertical shift between lines
-      </label>
+          </label>
+        </page>
+      </param>
      </page>
    </param>
   <effect needs-live-preview="false">
