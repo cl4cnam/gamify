@@ -117,7 +117,8 @@ def showNewMessageWithidDuringSeconds(p_message, p_id, p_messageXShift, p_messag
 		calljs fixMessageDisplay(messageSelector)
 def showNewMessageWithidUntilClick(p_message, p_id, p_messageXShift, p_messageYShift, p_interline):
 	parallel exitWith branch 1 ||
-		awaitClickBeep('#' + p_id)
+		waitSeconds(0)
+		awaitClickBeep('svg')
 	||
 		showNewMessageWithidForever(p_message, p_id, p_messageXShift, p_messageYShift, p_interline, 'svg')
 	||
@@ -171,12 +172,34 @@ def highlightSequence(p_sequence):
 					const elts = elementsToFind.seq[elementsToFind.num]
 					elts.forEach(elt=>{elt.classList.remove('highlight')})
 				}
+def matchItems(p_numberPerMatch, p_matchList):
+	var elementsToFind := listToPar(calljs getAll(p_matchList))
+	var remainingElements := elementsToFind
+	while not isNovalue(remainingElements):
+		var clickedElements := parallel(for anyElement in remainingElements, select p_numberPerMatch):
+			select:
+				awaitClickBeep(anyElement)
+			do:
+				addCssClassTo('chosen', anyElement)
+				anyElement
+		if allEqual(clickedElements.a_matchGroup):
+			addCssClassTo('matched', clickedElements)
+			remainingElements := valuesFrom(remainingElements, 'butNotFrom', clickedElements)
+		else:
+			waitSeconds(1)
+		delCssClassFrom('chosen', clickedElements)
+	# awaitForever()
+	waitSeconds(1)
+	js (elementsToFind):
+		elementsToFind.classList.remove('matched')
 
-''' + p_options.funcsug.replace(r'\n', '\n')
+''' + p_options.funcsug.replace(r'\n', '\n').replace('    ', '\t')
 
 class Gamify(inkex.EffectExtension):
 	def add_arguments(self, pars):
 		pars.add_argument("--tab")
+		pars.add_argument("--tab2")
+		pars.add_argument("--tab3")
 		pars.add_argument("--css")
 		pars.add_argument("--js")
 		pars.add_argument("--funcsug")
