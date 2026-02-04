@@ -236,9 +236,19 @@
 		g.classList.add('message')
 		if (p_id) g.setAttribute('id', p_id)
 		
-		const lElt_anchor = (p_idAnchor instanceof Element)
-						? p_idAnchor
-						: document.querySelector(p_idAnchor) || console.log("ERROR !!! libDOM.fg/showNewMessageForever '" + p_idAnchor + "' selector references no element!")
+		let ls_class
+		let lElt_anchor
+		if (p_idAnchor instanceof Element) {
+			lElt_anchor = p_idAnchor
+		} else {
+			const lList_idAnchor = p_idAnchor.split('/')
+			const ls_idAnchor = lList_idAnchor[0]
+			ls_class = (lList_idAnchor.length>1) ? lList_idAnchor[1] : 'other'
+			lElt_anchor = document.querySelector(ls_idAnchor)
+			if (lElt_anchor===null) console.log("ERROR !!! libDOM.fg/showNewMessageWithidForever '" + ls_idAnchor + "' selector references no element!")
+		}
+		g.classList.add(ls_class)
+
 		lElt_anchor.appendChild(g)
 		
 		const bb = text.getBBox()
@@ -258,17 +268,29 @@
 	!awaitForever
 }
 
-{deffunc showElementForever (p_element p_idAnchor)
+{deffunc showDetachedElementForever (p_element p_idAnchor)
 #        -------------------
 	.var elt
 	{ext (p_element p_idAnchor) `
 		const lElt_anchor = (p_idAnchor instanceof Element)
 						? p_idAnchor
-						: document.querySelector(p_idAnchor) || console.log("ERROR !!! libDOM.fg/showElementForever '" + p_idAnchor + "' selector references no element!")
+						: document.querySelector(p_idAnchor) || console.log("ERROR !!! libDOM.fg/showDetachedElementForever '" + p_idAnchor + "' selector references no element!")
 		lElt_anchor.appendChild(p_element)
 		SAVES.push({elt:p_element})
 	` elt `
 		SAVE.elt.parentNode.removeChild(SAVE.elt)
+	`}
+	!awaitForever
+}
+
+{deffunc showElementForever (p_element)
+#        -------------------
+	.var elt
+	{ext (p_element) `
+		p_element.style.display = 'inline'
+		SAVES.push({elt:p_element})
+	` elt `
+		SAVE.elt.style.display = 'none'
 	`}
 	!awaitForever
 }
