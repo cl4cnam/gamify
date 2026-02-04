@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+  <name>Interactive Story</name>
+  <id>fr.cli345.interactiveStory7</id>
+  <param name="tab" type="notebook">
+    <page name="story" gui-text="Story">
+      <param name="story" gui-text="Story" gui-description="Your interactive story" type="string" appearance="multiline">?char1: True?
+-> Yes
+    !: Ah!
+-> No
+    !: Oh!
+</param>
+    </page>
+    <page name="style" gui-text="Style">
+      <param name="css" gui-text="CSS" gui-description="Custom CSS" type="string" appearance="multiline">.message {
+	font-size: 1em;
+	&amp; > rect {
+		fill: white;
+		stroke: black;
+		opacity: 1;
+	}
+}
+.choice {
+	&amp; > rect {
+		fill: #ccc;
+		stroke: #aaa;
+		opacity: 1;
+	}
+	&amp;:hover {
+		fill: #666;
+		cursor: pointer;
+		&amp; > rect {
+			fill: #ddd;
+		}
+	}
+}</param>
+    </page>
+    <page name="messages" gui-text="Messages">
+      <label appearance="header">Messages</label>
+      <param name="messageXShift" type="int" min="0" max="100" gui-text="X Shift for messages" gui-description="Messages will be shifted horizontally by this amount">0</param>
+      <param name="messageYShift" type="int" min="0" max="100" gui-text="Y Shift for messages" gui-description="Messages will be shifted vertically by this amount">0</param>
+      <param name="interline" type="int" min="0" max="100" gui-text="Interline shift" gui-description="Lines inside a message will be spaced vertically by this amount">30</param>
+    </page>
+    <page name="help" gui-text="Help">
+      <label appearance="header">Goal</label>
+      <label xml:space="preserve">This extension transforms the drawing into an interactive story.
+      </label>
+      <label appearance="header">User guide</label>
+      <label xml:space="preserve">1) Prepare all the elements you want the user to find (for example, by setting a class to them)
+2) In the 'Selection' tab, choose a selector (for example, '.toFind' if you set a class 'toFind' to the targeted elements)
+3) If you want, customize the CSS (for example, to change the color of highlighting) in the 'Style' tab
+4) If you want, change the messages and their positions in the 'Messages' tab
+5) Click 'Apply'
+6) Save the file
+7) Test it by opening the file with a web browser</label>
+    </page>
+  </param>
+  <effect needs-live-preview="false">
+    <object-type>all</object-type>
+    <effects-menu>
+        <submenu name="Gamify">
+        </submenu>
+    </effects-menu>
+  </effect>
+
+  <script>
+    <command location="inx" interpreter="python">interactiveStory.py</command>
+  </script>
+</inkscape-extension>
