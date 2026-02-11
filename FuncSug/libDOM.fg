@@ -19,6 +19,15 @@
 	`}
 }
 
+{deffunc awaitEffectBeep (p_set p_unset)
+#        -------------
+		.var evtSug
+		{ext () $p_set evtSug $p_unset}
+		.print '==='
+		:await evtSug beep
+		.print '= = ='
+}
+
 #====================================
 # Click functions
 #====================================
@@ -61,6 +70,31 @@
 #        --------------
 		.var evtSug
 		(&getClick $p_idElt evtSug)
+		:await evtSug beep
+}
+
+{deffunc visiblyGetClick (p_idElt p_evtSug)
+	{ext (p_idElt) `
+		const lElt = (p_idElt instanceof Element) ? p_idElt : document.querySelector(p_idElt)
+		if (lElt===null) console.log("ERROR !!! libDOM.fs/visiblyGetClick '" + p_idElt + "' selector references no element!")
+		lElt.classList.add('active')
+		const l_react = function(evt) {
+			lElt.removeEventListener('click', l_react)
+			lElt.classList.remove('active')
+			output(1)
+		};
+		lElt.addEventListener('click', l_react)
+		SAVES.push({elt:lElt, react:l_react})
+	` $p_evtSug `
+		SAVE.elt.removeEventListener('click', SAVE.react)
+		SAVE.elt.classList.remove('active')
+	`}
+}
+
+{deffunc visiblyAwaitClickBeep (p_idElt)
+#        --------------
+		.var evtSug
+		(&visiblyGetClick $p_idElt evtSug)
 		:await evtSug beep
 }
 
@@ -252,7 +286,8 @@
 		lElt_anchor.appendChild(g)
 		
 		const bb = text.getBBox()
-		rect.setAttribute('x', bb.x-10)
+		//rect.setAttribute('x', bb.x-10)
+		rect.setAttribute('x', 10 + p_dx)
 		rect.setAttribute('y', bb.y-10)
 		rect.setAttribute('width', bb.width+20)
 		rect.setAttribute('height', bb.height+20)
