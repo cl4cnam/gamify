@@ -1,38 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
   <name>Interactive Story</name>
-  <id>fr.cli345.interactiveStory7</id>
+  <id>fr.cli345.interactiveStory12</id>
   <param name="tab" type="notebook">
     <page name="story" gui-text="Story">
-      <param name="story" gui-text="Story" gui-description="Your interactive story" type="string" appearance="multiline">?char1: True?
--> Yes
-    !: Ah!
--> No
-    !: Oh!
+      <param name="story" gui-text="Story" gui-description="Your interactive story" type="string" appearance="multiline"># This example code is adapted for numberStory.svg file. Test it on that file or adapt it.
+?: Bou hou, je n'arrive pas à savoir dans quel tas il y a le plus de pomme!
+->* visiblyAwaitClickBeep('#bigGroup')
+    ?: Tu m'as montré celui de gauche. Tu crois que c'est celui-là ?
+    -> Ben oui, ça se voit, non ?
+        !: Pas évident
+->* visiblyAwaitClickBeep('#smallGroup')
+    !: Tu m'as montré celui de droite. Tu crois que c'est celui-là ?
+-> Je dirais que c'est le premier
+    ?: J'aurais besoin d'être sûr, tu peux m'expliquer
+    -> Ben, il suffit de les compter
+        ?: Ah bon, il faut les compter... ça veut dire quoi compter
+        -> C'est dire 1,2,3,...
+            hide('#teardrop')
+            switch('#sad', '#smile')
+            ?: Ah bon, c'est rigolo, ton système et comment tu sais que ça va marcher
+            -> Ben, si on compte, on est sûr de soi
+                !: Ah bon, je vais essayer. Tu peux me montrer comme ça je saurai faire
 </param>
     </page>
     <page name="style" gui-text="Style">
       <param name="css" gui-text="CSS" gui-description="Custom CSS" type="string" appearance="multiline">.message {
-	font-size: 1em;
-	&amp; > rect {
-		fill: white;
-		stroke: black;
-		opacity: 1;
-	}
+    font-size: 1.5em;
+    &amp; > rect {
+        fill: white;
+        stroke: black;
+        opacity: 1;
+    }
 }
 .choice {
-	&amp; > rect {
-		fill: #ccc;
-		stroke: #aaa;
-		opacity: 1;
-	}
-	&amp;:hover {
-		fill: #666;
-		cursor: pointer;
-		&amp; > rect {
-			fill: #ddd;
-		}
-	}
+    &amp; > rect {
+        fill: #ccc;
+        stroke: #aaa;
+        opacity: 1;
+    }
+    &amp;:hover {
+        fill: #666;
+        cursor: pointer;
+        &amp; > rect {
+            fill: #ddd;
+        }
+    }
+}
+.active:hover {
+    filter: saturate(70%) brightness(200%);
 }</param>
     </page>
     <page name="messages" gui-text="Messages">
