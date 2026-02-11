@@ -28,9 +28,12 @@ def custom(p_options):
 	inputText = '\n' + p_options.story.replace('\\n', '\n').replace('    ', '\t')
 	inputText = re.sub(r'\n(\t*)!: (.*)(?=\n)',r'\n\1showMessage("\2")', inputText)
 	inputText = re.sub(r'\n(\t*)!(.*): (.*)(?=\n)',r'\n\1showTalk("\3", "#\2")', inputText)
-	inputText = re.sub(r'\n(\t*)\?: (.*)(?=\n)',r'\n\1showMessage("\2")\n\1parallel(select 1) ||', inputText)
-	inputText = re.sub(r'\n(\t*)\?(.*): (.*)(?=\n)',r'\n\1showTalk("\3", "#\2")\n\1parallel(select 1) ||', inputText)
+	# ~ inputText = re.sub(r'\n(\t*)\?: (.*)(?=\n)',r'\n\1showMessage("\2")\n\1parallel(select 1) ||', inputText)
+	inputText = re.sub(r'\n(\t*)\?: (.*)(?=\n)',r'\n\1parallel(select 1) ||\n\1||=========================\n\1\tshowMessage("\2")\n\1\tawaitForever()\n\1...-------\n\1\t"dummy"', inputText)
+	# ~ inputText = re.sub(r'\n(\t*)\?(.*): (.*)(?=\n)',r'\n\1showTalk("\3", "#\2")\n\1parallel(select 1) ||', inputText)
+	inputText = re.sub(r'\n(\t*)\?(.*): (.*)(?=\n)',r'\n\1parallel(select 1) ||\n\1||=========================\n\1\tshowTalk("\3", "#\2")\n\1\tawaitForever()\n\1...-------\n\1\t"dummy"', inputText)
 	inputText = re.sub(r'\n(\t*)-> (.*)(?=\n)',r'\n\1||=========================\n\1\tWAIT_FOR_CHOICE("\2")\n\1...-------', inputText)
+	inputText = re.sub(r'\n(\t*)->\* (.*)(?=\n)',r'\n\1||=========================\n\1\t\2\n\1...-------', inputText)
 	# ~ p_options.msg(inputText)
 	return r'''Find all the ...
 ===+++===+++===
@@ -47,16 +50,27 @@ function getAll(ps_selector) {
 ===+++===+++===
 # FuncSug part
 #=============
-var choiceCounter := js([], `return {num: 0}`)
+def hide(p_elt):
+	js (p_elt):
+		document.querySelector(p_elt).style.display = 'none'
+def show(p_elt):
+	js (p_elt):
+		document.querySelector(p_elt).style.display = 'inline'
+def switch(p_elt1, p_elt2):
+	hide(p_elt1)
+	show(p_elt2)
+
+var choiceCounter := js([], `return {num: 1}`)
 def resetChoiceCounter():
 	js (choiceCounter):
-		choiceCounter.num = 0
+		choiceCounter.num = 1
+
 def showNewMessageUntilClick(p_message, p_id, p_class, p_num):
 	parallel exitWith branch 1 ||
 		waitSeconds(0)
 		awaitClickBeep('#' + p_id)
 	||
-		showNewMessageWithidForever(p_message, p_id, 0, p_num*50, 30, 'svg/' + p_class)
+		showNewMessageWithidForever(p_message, p_id, 20, p_num*50, 30, 'svg/' + p_class)
 	||
 		if p_class = 'choice':
 			'workaroundString'
