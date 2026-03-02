@@ -4,8 +4,7 @@ Inkscape extension
 
 Gamify is an Inkscape extension that transforms your drawings into games.
 
-<img width="327" height="392" alt="menu" src="https://github.com/user-attachments/assets/6c57b395-777c-46d8-b455-49a22b704226" />
-<img width="533" height="200" alt="menuDetail" src="https://github.com/user-attachments/assets/e919b407-b3d9-46fd-b6e9-8ab3e9937e2c" />
+<img width="532" height="414" alt="fullMenuB" src="https://github.com/user-attachments/assets/d7ae1266-a26e-4fd2-b26c-289bc91756be" />
 
 With this extension, you can use:
 
