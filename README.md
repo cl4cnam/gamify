@@ -8,17 +8,17 @@ Gamify is an Inkscape extension that transforms your drawings into games.
 
 With this extension, you can use:
 
-**Color this drawing** — to create coloring games
+**Color this drawing** — to create coloring games,
 
-**Highlight sequence** — to highlight elements in a specific order
+**Highlight sequence** — to highlight elements in a specific order,
 
-**Find all the…** — to create “find the objects” games inside an image
+**Find all the…** — to create “find the objects” games inside an image,
 
-**Match item** — to build matching or correspondence games
+**Match item** — to build matching or correspondence games,
 
-**Interactive story** — to create interactive stories
+**Interactive story** — to create interactive stories,
 
-**Custom** — to generate your own game logic
+**Custom** — to generate your own game logic.
 
 ### 🎯 Purpose of Gamify
 Gamify aims to let any Inkscape user create games without writing code, except for the **Interactive story** and **Custom** options, which allow advanced users to add their own logic.
@@ -35,13 +35,13 @@ Gamify est une extension Inkscape qui permet de transformer vos dessins en jeux.
 
 Avec cette extension, vous pouvez utiliser :
 
-**Color this drawing** pour créer des jeux de coloriage
+**Color this drawing** pour créer des jeux de coloriage,
 
-**Highlight sequence** pour mettre en évidence les éléments que l'ont veut montrer.
+**Highlight sequence** pour mettre en évidence les éléments que l'ont veut montrer,
 
-**Find all the...** pour créer des jeux d'objets à trouver dans une image
+**Find all the...** pour créer des jeux d'objets à trouver dans une image,
 
-**match item** pour créer des jeux "trouver les corrspondances"
+**Match item** pour créer des jeux "trouver les correspondances",
 
 **Interactive story** pour créer des histoires interactives,
 
@@ -49,8 +49,8 @@ Avec cette extension, vous pouvez utiliser :
 
 ### 🎯 L’objectif de Gamify: 
 
-Permettre à tout utilisateur d’Inkscape de créer des jeux sans écrire de code, sauf **Interactive story** et **custum**
+Permettre à tout utilisateur d’Inkscape de créer des jeux sans écrire de code, sauf **Interactive story** et **custom**
 
 ### 🧩 Ecrire du code dans Gamify
 
-Avec **Interactive story** et **custum** vous pouvez personaliser vos jeux avec des lignes de code en langage FuncSug.
+Avec **Interactive story** et **custom** vous pouvez personnaliser vos jeux avec des lignes de code en langage FuncSug.
